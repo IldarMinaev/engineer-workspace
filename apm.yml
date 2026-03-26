@@ -6,6 +6,5 @@ dependencies:
   apm:
   - IldarMinaev/qubership-dbaas#ai-skills
   - IldarMinaev/pgskipper-operator#ai-skills
-  - IldarMinaev/troubleshooting-skill#ai-skills
   mcp: []
 scripts: {}
