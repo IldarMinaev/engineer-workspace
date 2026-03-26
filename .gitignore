@@ -16,4 +16,5 @@ apm.lock.yaml
 
 # Claude
 .claude/settings.local.json
+.claude/skills
 
