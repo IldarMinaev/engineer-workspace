@@ -8,6 +8,14 @@ This repository manages [APM](https://github.com/microsoft/apm) dependencies for
 
 ## Usage
 
+Get Context7 API Token
+
+Export env variable for token:
+
+```sh
+export CONTEXT7_API_KEY="..."
+```
+
 Install apm:
 
 ```sh
