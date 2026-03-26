@@ -4,7 +4,11 @@ description: AI Troubleshooting workspace
 author: QuberShip
 dependencies:
   apm:
-  - IldarMinaev/qubership-dbaas#ai-skills
-  - IldarMinaev/pgskipper-operator#ai-skills
+  - git: IldarMinaev/qubership-dbaas
+    path: ai-packages/troubleshooting
+    ref: ai-skills
+  - git: IldarMinaev/pgskipper-operator#ai-skills
+    path: ai-packages/troubleshooting
+    ref: ai-skills
   mcp: []
 scripts: {}
