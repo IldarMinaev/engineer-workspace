@@ -10,11 +10,39 @@ out/
 *.code-workspace
 .history/
 
-# APM (https://github.com/microsoft/apm)
+# APM local files (https://github.com/microsoft/apm)
 apm_modules/
 apm.lock.yaml
 
+# Ignore locally changed agents configuration from git, as it expected to be managed by APM
+
+# General agents
+AGENTS.md
+
 # Claude
 .claude/settings.local.json
-.claude/skills
+.claude/skills/
+.claude/commands/
+
+# Copilot
+.github/skills/
+.github/prompts/
+.github/agents/
+.github/instructions/
+.github/hooks/
+.github/plugin/
+
+# OpenCode
+.opencode/skills/
+.opencode/commands/
+.opencode/agents/
+opencode.json
+
+# Cursor
+.cursor/rules/
+.cursor/agents/
+.cursor/skills/
+.cursor/hooks.json
+.cursor/hooks/
+.cursor/mcp.json
 
