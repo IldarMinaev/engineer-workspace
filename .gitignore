@@ -1,0 +1,19 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# VSCode
+.vscode/
+*.code-workspace
+.history/
+
+# APM (https://github.com/microsoft/apm)
+apm_modules/
+apm.lock.yaml
+
+# Claude
+.claude/settings.local.json
+

@@ -1,0 +1,11 @@
+# Normalize line endings to LF on checkout
+* text=auto eol=lf
+
+# Explicitly text files
+*.md text
+*.yml text
+*.yaml text
+*.json text
+*.txt text
+*.sh text eol=lf
+

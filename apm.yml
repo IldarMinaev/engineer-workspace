@@ -1,0 +1,11 @@
+name: engineer-workspace
+version: 1.0.0
+description: AI Troubleshooting workspace
+author: QuberShip
+dependencies:
+  apm:
+  - IldarMinaev/qubership-dbaas#ai-skills
+  - IldarMinaev/pgskipper-operator#ai-skills
+  - IldarMinaev/troubleshooting-skill
+  mcp: []
+scripts: {}
