@@ -205,7 +205,7 @@ run_apm_install() {
   # Use the alias we just created
   if command -v apm &>/dev/null; then
     apm compile -t "${ai_agent}"
-    apm install --runtime "${ai_agent}"
+    apm install --runtime "${ai_agent}" --force
   else
     # Fallback to uv tool run
     uv tool run --python 3.12 --from apm-cli apm install --runtime "${ai_agent}"
