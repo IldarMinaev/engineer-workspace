@@ -204,6 +204,7 @@ run_apm_install() {
 
   # Use the alias we just created
   if command -v apm &>/dev/null; then
+    apm compile -t "${ai_agent}"
     apm install --runtime "${ai_agent}"
   else
     # Fallback to uv tool run
@@ -265,7 +266,7 @@ main() {
 
   # Install dependencies
   install_uv
-  install_nodejs_22
+  # install_nodejs_22
   install_apm_and_alias
 
   # Run apm install
