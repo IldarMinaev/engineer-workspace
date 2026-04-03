@@ -25,6 +25,15 @@ log_error() {
   echo -e "${RED}[ERROR]${NC} $1"
 }
 
+require_cmd() {
+    for cmd in "$@"; do
+        if ! command -v "$cmd" &>/dev/null; then
+            log_error "Required command not found: $cmd"
+            exit 1
+        fi
+    done
+}
+
 # Detect AI Agent from environment variable, command line argument, or prompt user
 detect_ai_agent() {
   local ai_agent=""
@@ -168,6 +177,14 @@ install_nodejs_22() {
   log_success "Node.js 22 installed successfully"
 }
 
+# Install
+install_tscli() {
+  require_cmd go
+  log_info "Installing tscli..."
+  go install github.com/vlsi/troubleshooting-cli/cmd/tscli@latest
+  log_success "tscli installed successfully"
+}
+
 # Install apm-cli via uv and set up alias
 install_apm_and_alias() {
   # Install apm-cli if not already installed via uv
@@ -260,13 +277,17 @@ run_ai_agent() {
 main() {
   echo -e "\n${BLUE}=== APM Workspace Setup Script ===${NC}\n"
 
+  log_info "Check dependencies..."
+  require_cmd kubectl
+
   # Detect AI Agent
   AI_AGENT=$(detect_ai_agent "$@")
   log_info "Selected AI Agent: ${AI_AGENT}"
 
   # Install dependencies
+  install_tscli
   install_uv
-  # install_nodejs_22
+# install_nodejs_22
   install_apm_and_alias
 
   # Run apm install
