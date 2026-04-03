@@ -7,9 +7,6 @@ dependencies:
   - git: IldarMinaev/qubership-dbaas
     path: ai-packages/troubleshooting
     ref: ai-skills
-  mcp:
-  # Only for testing
-  - name: context7
-    type: registry
-    id: mcp/upstash/context7
+  mcp: {}
 scripts: {}
+
