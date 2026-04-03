@@ -181,7 +181,7 @@ install_nodejs_22() {
 install_tscli() {
   require_cmd go
   log_info "Installing tscli..."
-  go install github.com/vlsi/troubleshooting-cli/cmd/tscli@latest
+  GOBIN="$(pwd)" go install github.com/vlsi/troubleshooting-cli/cmd/tscli@latest
   log_success "tscli installed successfully"
 }
 

@@ -14,35 +14,43 @@ out/
 apm_modules/
 apm.lock.yaml
 
+# Ignore locally installed tools
+tscli
+
 # Ignore locally changed agents configuration from git, as it expected to be managed by APM
 
 # General agents
 AGENTS.md
 
 # Claude
-.claude/settings.local.json
-.claude/skills/
-.claude/commands/
+.claude/
+!.claude/settings.json
+#.claude/settings.local.json
+#.claude/skills/
+#.claude/commands/
 
 # Copilot
-.github/skills/
-.github/prompts/
-.github/agents/
-.github/instructions/
-.github/hooks/
-.github/plugin/
+.github/
+#.github/skills/
+#.github/prompts/
+#.github/agents/
+#.github/instructions/
+#.github/hooks/
+#.github/plugin/
 
 # OpenCode
-.opencode/skills/
-.opencode/commands/
-.opencode/agents/
-opencode.json
+.opencode/
+#.opencode/skills/
+#.opencode/commands/
+#.opencode/agents/
+#opencode.json
 
 # Cursor
-.cursor/rules/
-.cursor/agents/
-.cursor/skills/
-.cursor/hooks.json
-.cursor/hooks/
-.cursor/mcp.json
+.cursor/
+#.cursor/rules/
+#.cursor/agents/
+#.cursor/skills/
+#.cursor/hooks.json
+#.cursor/hooks/
+#.cursor/mcp.json
 
