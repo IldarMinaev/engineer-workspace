@@ -41,21 +41,21 @@ detect_ai_agent() {
   # Check environment variable (suggested name: AI_AGENT)
   if [[ -n "${AI_AGENT}" ]]; then
     ai_agent="${AI_AGENT}"
-    log_info "Using AI Agent from environment variable AI_AGENT: ${ai_agent}"
+    log_info "Using AI Agent from environment variable AI_AGENT: ${ai_agent}" >&2
   fi
 
   # Check command line argument (--agent or -a)
   for arg in "$@"; do
     if [[ "${arg}" =~ ^--agent= ]] || [[ "${arg}" =~ ^-a= ]]; then
       ai_agent="${arg#*=}"
-      log_info "Using AI Agent from command line argument: ${ai_agent}"
+      log_info "Using AI Agent from command line argument: ${ai_agent}" >&2
       break
     elif [[ "${arg}" == "--agent" ]] || [[ "${arg}" == "-a" ]]; then
       # Next argument should be the agent name
       for next_arg in "$@"; do
         if [[ "${next_arg}" != "${arg}" ]]; then
           ai_agent="${next_arg}"
-          log_info "Using AI Agent from command line argument: ${ai_agent}"
+          log_info "Using AI Agent from command line argument: ${ai_agent}" >&2
           break 2
         fi
       done
@@ -99,7 +99,7 @@ detect_ai_agent() {
         break
         ;;
       *)
-        log_error "Invalid choice. Please enter 1-3 or one of: copilot, codex, vscode, claude"
+        log_error "Invalid choice. Please enter 1-3 or one of: copilot, codex, vscode, claude" >&2
         ;;
       esac
     done
@@ -216,16 +216,31 @@ install_apm_and_alias() {
 # Run apm install with the specified runtime
 run_apm_install() {
   local ai_agent="$1"
+  local os_name
+  local compile_target
+  os_name="$(uname -s)"
 
   log_info "Running apm install for runtime: ${ai_agent}..."
 
-  # Use the alias we just created
-  if command -v apm &>/dev/null; then
-    apm compile -t "${ai_agent}"
+  # apm compile uses target names, not runtime names.
+  # copilot runtime maps to vscode compile target.
+  compile_target="${ai_agent}"
+  if [[ "${compile_target}" == "copilot" ]]; then
+    compile_target="vscode"
+  fi
+
+  # macOS: avoid stale system apm and use uv-managed apm directly.
+  if [[ "${os_name}" == "Darwin" ]]; then
+    uv tool run --python 3.12 --from apm-cli apm install --target "${ai_agent}" --force
+    uv tool run --python 3.12 --from apm-cli apm compile -t "${compile_target}"
+  # Linux: keep original behavior.
+  elif command -v apm &>/dev/null; then
     apm install --runtime "${ai_agent}" --force
+    apm compile -t "${compile_target}"
   else
     # Fallback to uv tool run
-    uv tool run --python 3.12 --from apm-cli apm install --runtime "${ai_agent}"
+    uv tool run --python 3.12 --from apm-cli apm install --runtime "${ai_agent}" --force
+    uv tool run --python 3.12 --from apm-cli apm compile -t "${compile_target}"
   fi
 
   if [[ $? -eq 0 ]]; then
