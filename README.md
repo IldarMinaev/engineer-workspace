@@ -49,8 +49,8 @@ uv tool install --python 3.12 apm-cli --force
 alias apm='uv tool run --python 3.12 --from apm-cli apm'
 
 # Install skills
-apm compile -t <agent>
 apm install --runtime <agent> --force
+apm compile -t <agent>
 
 ```
 
